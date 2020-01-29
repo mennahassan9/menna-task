@@ -73,10 +73,7 @@ app.post('/', (req, res) => {
             }        
 
             suggested.push(user[k].name +" "+ name)
-        }
-        for (var o=0;o<suggested.length;o++){
-            fs.appendFileSync(req.body.output, suggested[o] + "\n");
-            
+            fs.appendFileSync(req.body.output, user[k].name +" "+ name + "\n");
         }
     } catch (err) {
        res.send("something went wrong")

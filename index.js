@@ -16,18 +16,19 @@ app.listen(3000, () => {
 
 app.post('/', (req, res) => {
 
-    var lines = fs.readFileSync(req.body.input, 'utf-8')
-        .split('\r\n')
+    var lines = fs.readFileSync('./input/'+req.body.input, 'utf-8')
+        .split('\n')
         .filter(Boolean);
     var count = 0;
     var swvl = [];
+    console.log(lines, "LINES")
     for (var i = 0; i < lines[0]; i++) {
         swvl[i] = [];
     }
     var user = [];
     var i = 1;
     suggested= [];
-    fs.unlink(req.body.output, function(err) {
+    fs.unlink('./input/'+req.body.output, function(err) {
         if(err && err.code == 'ENOENT') {
             // file doens't exist
             console.info("File doesn't exist, won't remove it.");
@@ -73,7 +74,7 @@ app.post('/', (req, res) => {
             }        
 
             suggested.push(user[k].name +" "+ name)
-            fs.appendFileSync(req.body.output, user[k].name +" "+ name + "\n");
+            fs.appendFileSync('./input/'+req.body.output, user[k].name +" "+ name + "\n");
         }
     } catch (err) {
        res.send("something went wrong")

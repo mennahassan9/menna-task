@@ -1,0 +1,15 @@
+version: '2'
+
+networks:
+  swvl:
+
+services:
+  swvl-1:
+    image: swvl-a
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./input:/usr/src/app
+    container_name: trial
+    networks:
+      - swvl
